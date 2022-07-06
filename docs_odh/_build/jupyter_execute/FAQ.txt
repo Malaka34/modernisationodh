@@ -1,0 +1,8 @@
+# Chargement du fichier des modalités (explain all the params)
+Modalites = pd.read_csv(path_vars+nom_Fichier_Modalite, delimiter=';', encoding='latin1')
+
+# renommage des colonnes (explain why ?)
+Modalites.rename(columns={'codemodalid':'CodeModalID', 'categ_regroupement':'Categ_regroupement', 'libelle_long	':'Libelle_long', 'codemodalext':'CodeModalEXT', 'libellemodal':'LibelleModal'}, inplace=True)
+
+# Enregistrement des modifications
+Modalites.to_csv(path_vars+nom_Fichier_Modalite,index=False,sep=';', encoding='utf-8')

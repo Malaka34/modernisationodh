@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Pré-traitement
+    chapters:
+    - file: Pré-traitement
+  - caption: Traitement
+    chapters:
+    - file: Traitement
+    - file: Déconstruction
+    - file: Versement
+    - file: Vues
+  - caption: FAQ
+    chapters:
+    - file: FAQ
