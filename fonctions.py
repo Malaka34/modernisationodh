@@ -143,7 +143,7 @@ def creationTableAvecFichierComplet(fichierCSV, nom, nom_schema, con, nbclE, Cle
         infoMeta['types'][indicePK] = type(1)
         #print(infoMeta['types'])
 
-    
+    #print(max_value) 
    #clée étrangère
 
     nbcleEtran = int(nbclE)
@@ -208,10 +208,10 @@ def creationTableAvecFichierComplet(fichierCSV, nom, nom_schema, con, nbclE, Cle
         
         if(infoMeta['types'][j]==type(1)):
             if((infoMeta['colonnes'][j]==infoMeta['primary_key'][0]) and len(max_value)>10):
-                print(infoMeta['colonnes'][j])
-                infoMeta['types'][j]= 'text'
+                #print(infoMeta['colonnes'][j])
+                infoMeta['types'][j]= 'text' # je laisse cette condition au cas où on voudrait garder des colonnes en integer==> remplacer 'text' par 'int'
             else:
-                infoMeta['types'][j]= 'int'
+                infoMeta['types'][j]= 'text'
         elif(infoMeta['types'][j]==type(1.0)):
             infoMeta['types'][j]= 'float'
         elif(infoMeta['types'][j]== type('a')):
@@ -574,9 +574,7 @@ def traitementDonnees(fichier_A_traiter,nomFichier,codevarid,annee,nom_Fichier_M
                                  'IndicePosition', 'Valeur'])
     
     tabATraite = fichier_A_traiter
-    # renaming col code geo avant de checker les modalidés
-#     tabATraite.rename(columns={tabATraite.columns[0]: echelle}) # ce code n'a normalement pas d'effet sur le traitement. revoir pourquoi il est toujours là
-    
+
     # pour avoir la liste des modalitées
     listeCodeModa = checkingModalites(tabATraite,nom_Fichier_Modalite,path_vars)
     
@@ -611,7 +609,7 @@ def traitementDonnees(fichier_A_traiter,nomFichier,codevarid,annee,nom_Fichier_M
         #Remplacement des cellules vides par des zeros
         newTabTraite.fillna('NULL', inplace=True)
         
-          
+         
     #the new file's name
     newName = nomFichier +'.csv'
     
