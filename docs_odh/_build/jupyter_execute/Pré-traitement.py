@@ -14,6 +14,7 @@
 # 8.	Lorsqu’il y a des non renseignés, laisser leurs cellules vides. Ne surtout pas mettre ‘ns’ au risque de compromettre la cohérence du typage de cette colonne
 # 9.	La règle 8 s’applique aussi pour les données secrétisées. Laisser leurs cellules vides.
 # Par ailleurs il existe une fonction dans le processus de déconstruction qui vérifie les premières règles. Les noms de colonnes sont transformés en modalités et ceux des onglets en variables.
+# 10. Ne garder dans les fichiers Excel que les lignes à charger dans la base de données
 # 
 
 # In[ ]:

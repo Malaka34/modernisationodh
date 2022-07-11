@@ -6,3 +6,21 @@ Modalites.rename(columns={'codemodalid':'CodeModalID', 'categ_regroupement':'Cat
 
 # Enregistrement des modifications
 Modalites.to_csv(path_vars+nom_Fichier_Modalite,index=False,sep=';', encoding='utf-8')
+
+# Chargement du fichier des modalités (explain all the params)
+Variables = pd.read_csv(path_vars+nom_Fichier_Variable,sep=';',encoding='latin1')
+
+# renommage des colonnes (explain why ?)
+Variables.rename(columns={'codevarid':'CodeVarID','libaxeanalyse':'LibAxeAnalyse','origine':'Origine','codevarext':'CodeVarEXT'},inplace=True)
+
+# Enregistrement des modifications
+Variables.to_csv(path_vars+nom_Fichier_Variable,index=False,sep=';',encoding='utf-8')
+
+# Chargement du fichier des modalités (explain all the params)
+Posseder = pd.read_csv(path_vars+'posseder_aides_personne.csv',sep=',',encoding='utf-8')
+
+# renommage des colonnes (explain why ?)
+Posseder.rename(columns={'codevarid':'CodeVarID','codemodalid':'CodeModalID'},inplace=True)
+
+# Enregistrement des modifications
+Posseder.to_csv(path_vars+'posseder_aides_personne.csv',index=False,sep=';',encoding='utf-8')

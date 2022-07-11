@@ -50,10 +50,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/FAQ.html" />
+    <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/FAQ.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="I - Paramètre à renseigner sur le script" href="Traitement.html" />
+    <link rel="prev" title="IV - Enregistrement des Vues" href="Vues.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -126,6 +126,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
    I -  Paramètre à renseigner sur le script
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="D%C3%A9construction.html">
+   II - Déconstruction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Versement.html">
+   III - Versement de données et suppression des dossiers temporaire
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Vues.html">
+   IV - Enregistrement des Vues
   </a>
  </li>
 </ul>
@@ -213,7 +228,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://gitlab.com/odh1/Modernisation_ODH/"
+        <a href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -230,7 +245,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://gitlab.com/odh1/Modernisation_ODH//issues/new?title=Issue%20on%20page%20%2FFAQ.html&body=Your%20issue%20content%20here."
+        <a href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/issues/new?title=Issue%20on%20page%20%2FFAQ.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -247,7 +262,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/odh1/Modernisation_ODH/edit/master/docs/FAQ.md"
+        <a href="https://github.com/tree/master/edit/master/docs/FAQ.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -355,6 +370,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
    Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichier-des-modalites">
+     Fichier des Modalités
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichier-des-variables">
+     Fichier des Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichier-de-jointure-posseder">
+     Fichier de jointure Posseder
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -379,6 +411,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
    Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichier-des-modalites">
+     Fichier des Modalités
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichier-des-variables">
+     Fichier des Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichier-de-jointure-posseder">
+     Fichier de jointure Posseder
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -396,6 +445,8 @@ title="Print to PDF"
 <h2>Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?<a class="headerlink" href="#question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4" title="Permalink to this headline">#</a></h2>
 <p>Après un téléchargement depuis pgAdmin, il faut s’assurer que le séparateur de texte du fichier téléchargé est ‘;’. Ceci en le réenregistrant via Excel et en choisissant ‘;’ comme séparateur. Il faut aussi s’assuer que l’encodage soit en utf8.
 Voici des exemples de comment faire :</p>
+<section id="fichier-des-modalites">
+<h3>Fichier des Modalités<a class="headerlink" href="#fichier-des-modalites" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
@@ -420,6 +471,61 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </div>
+</section>
+<section id="fichier-des-variables">
+<h3>Fichier des Variables<a class="headerlink" href="#fichier-des-variables" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
+<span class="n">Variables</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
+<span class="n">Variables</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;codevarid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeVarID&#39;</span><span class="p">,</span><span class="s1">&#39;libaxeanalyse&#39;</span><span class="p">:</span><span class="s1">&#39;LibAxeAnalyse&#39;</span><span class="p">,</span><span class="s1">&#39;origine&#39;</span><span class="p">:</span><span class="s1">&#39;Origine&#39;</span><span class="p">,</span><span class="s1">&#39;codevarext&#39;</span><span class="p">:</span><span class="s1">&#39;CodeVarEXT&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
+<span class="n">Variables</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fichier-de-jointure-posseder">
+<h3>Fichier de jointure Posseder<a class="headerlink" href="#fichier-de-jointure-posseder" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
+<span class="n">Posseder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="s1">&#39;posseder_aides_personne.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
+<span class="n">Posseder</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;codevarid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeVarID&#39;</span><span class="p">,</span><span class="s1">&#39;codemodalid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeModalID&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
+<span class="n">Posseder</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="s1">&#39;posseder_aides_personne.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -450,11 +556,11 @@ Voici des exemples de comment faire :</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Traitement.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Vues.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">I -  Paramètre à renseigner sur le script</p>
+            <p class="prev-next-title">IV - Enregistrement des Vues</p>
         </div>
     </a>
 </div>

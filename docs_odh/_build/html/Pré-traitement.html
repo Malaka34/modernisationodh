@@ -50,7 +50,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/Pré-traitement.html" />
+    <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/Pré-traitement.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="I - Paramètre à renseigner sur le script" href="Traitement.html" />
@@ -129,6 +129,21 @@ const thebe_selector_output = ".output, .cell_output"
    I -  Paramètre à renseigner sur le script
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="D%C3%A9construction.html">
+   II - Déconstruction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Versement.html">
+   III - Versement de données et suppression des dossiers temporaire
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Vues.html">
+   IV - Enregistrement des Vues
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -139,18 +154,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="FAQ.html">
    FAQ
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  To be deleted
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown-notebooks.html">
-   Notebooks with MyST Markdown
   </a>
  </li>
 </ul>
@@ -226,7 +229,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://gitlab.com/odh1/Modernisation_ODH/"
+        <a href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -243,7 +246,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://gitlab.com/odh1/Modernisation_ODH//issues/new?title=Issue%20on%20page%20%2FPré-traitement.html&body=Your%20issue%20content%20here."
+        <a href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/issues/new?title=Issue%20on%20page%20%2FPré-traitement.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -260,7 +263,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/odh1/Modernisation_ODH/edit/master/docs/Pré-traitement.ipynb"
+        <a href="https://github.com/tree/master/edit/master/docs/Pré-traitement.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -363,6 +366,7 @@ title="Print to PDF"
 <li><p>Lorsqu’il y a des non renseignés, laisser leurs cellules vides. Ne surtout pas mettre ‘ns’ au risque de compromettre la cohérence du typage de cette colonne</p></li>
 <li><p>La règle 8 s’applique aussi pour les données secrétisées. Laisser leurs cellules vides.
 Par ailleurs il existe une fonction dans le processus de déconstruction qui vérifie les premières règles. Les noms de colonnes sont transformés en modalités et ceux des onglets en variables.</p></li>
+<li><p>Ne garder dans les fichiers Excel que les lignes à charger dans la base de données</p></li>
 </ol>
 </section>
 
