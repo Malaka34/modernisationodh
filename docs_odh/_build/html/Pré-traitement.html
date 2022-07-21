@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/Pré-traitement.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="I - Paramètre à renseigner sur le script" href="Traitement.html" />
+    <link rel="next" title="I - Paramètres à renseigner sur le script" href="Traitement.html" />
     <link rel="prev" title="Hello !" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -95,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1">
@@ -139,9 +139,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Vues.html">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -352,22 +359,29 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="nettoyage-du-workbook-excel">
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="nettoyage-du-workbook-excel">
 <h1>Nettoyage du WorkBook Excel<a class="headerlink" href="#nettoyage-du-workbook-excel" title="Permalink to this headline">#</a></h1>
-<p>La première étape consiste à nettoyer le WorkBook Excel afin qu’il soit prêt à être passé à la fonction de déconstruction. Dans cette il faut que les règles ci-dessus soient respectés :</p>
-<ol class="simple">
-<li><p>Pas de parenthèses dans les noms de colonnes, ni dans les noms d’onglets</p></li>
-<li><p>Pas de caractères spéciaux (&lt;,&gt;,=,-, .) dans les noms de colonnes, ni dans les noms d’onglets</p></li>
-<li><p>Ne pas laisser d’espace à la fin du nom de colonne ou d’onglet</p></li>
-<li><p>Ne pas commencer le nom d’une colonne par des chiffres</p></li>
-<li><p>Ne pas mettre des chiffres comme nom de colonnes ni dans les noms d’onglets</p></li>
-<li><p>Ne mettre qu’une table (information / données) par onglet, car chaque onglet va être transformé en fichier CSV</p></li>
-<li><p>Les données doivent être de la même échelle (commune / Epci / Iris) dans un WorkBook</p></li>
-<li><p>Lorsqu’il y a des non renseignés, laisser leurs cellules vides. Ne surtout pas mettre ‘ns’ au risque de compromettre la cohérence du typage de cette colonne</p></li>
-<li><p>La règle 8 s’applique aussi pour les données secrétisées. Laisser leurs cellules vides.
-Par ailleurs il existe une fonction dans le processus de déconstruction qui vérifie les premières règles. Les noms de colonnes sont transformés en modalités et ceux des onglets en variables.</p></li>
-<li><p>Ne garder dans les fichiers Excel que les lignes à charger dans la base de données</p></li>
-</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><strong>Suggestion :</strong></p></li>
+</ul>
+<p>Il est fortement conseillé d’utilisé des <strong>classeurs Excel dont les extentions sont <code class="docutils literal notranslate"><span class="pre">xlsx</span></code></strong>. Convertiser donc si besoin vos classeurs <code class="docutils literal notranslate"><span class="pre">xls</span></code> en <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>.</p>
+</div>
+<p>La première étape consiste à nettoyer le classeur Excel afin qu’il soit prêt à être passé à la fonction de déconstruction. Dans cette il faut que les règles ci-dessus soient respectées :</p>
+<p>1 -	Pas de parenthèses dans les noms de colonnes, ni dans les noms d’onglets <br></p>
+<p>2 -	Pas de caractères spéciaux (&lt;,&gt;,=,-, .) dans les noms de colonnes, ni dans les noms d’onglets<br></p>
+<p>3 -	Ne pas laisser d’espace à la fin du nom de colonne ou d’onglet<br></p>
+<p>4 -	Ne pas commencer le nom d’une colonne par des chiffres<br></p>
+<p>5 -	Ne pas mettre des chiffres comme nom de colonnes ni dans les noms d’onglets<br></p>
+<p>6 -	Ne mettre qu’une table par onglet, car chaque onglet va être transformé en fichier CSV<br></p>
+<p>7 -	Les données doivent être de la même échelle (commune / Epci / Iris) dans un classeur<br></p>
+<p>8 -	Lorsqu’il y a des informations non renseignés, laisser leurs cellules vides. Ne surtout pas mettre “ns” au risque de compromettre la cohérence du typage de cette colonne<br></p>
+<p>9 - Ne garder dans les fichiers Excel que les lignes à charger dans la base de données<br></p>
+<p>10 - La règle 8 s’applique aussi pour les données secrétisées. Laisser leurs cellules vides.<br></p>
+<p>Par ailleurs il existe une fonction dans le processus de déconstruction qui vérifie les premières règles. Les noms de colonnes sont transformés en modalités et ceux des onglets en variables (voir la section <strong>FAQ</strong>).</p>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -407,7 +421,7 @@ Par ailleurs il existe une fonction dans le processus de déconstruction qui vé
     <a class='right-next' id="next-link" href="Traitement.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">I -  Paramètre à renseigner sur le script</p>
+        <p class="prev-next-title">I -  Paramètres à renseigner sur le script</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -418,7 +432,7 @@ Par ailleurs il existe une fonction dans le processus de déconstruction qui vé
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

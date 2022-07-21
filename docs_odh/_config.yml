@@ -2,8 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Documentation traitements et versements de données
-author: Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"
-logo: Logo.jpg
+author: Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat
+logo: Logo_ODH.jpg
 description: >-
   Première version interactive Jupyter book pour construire la documentation des notebook de traitements et versements!
   

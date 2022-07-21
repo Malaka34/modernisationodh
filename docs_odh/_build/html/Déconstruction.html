@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="III - Versement de données et suppression des dossiers temporaire" href="Versement.html" />
-    <link rel="prev" title="I - Paramètre à renseigner sur le script" href="Traitement.html" />
+    <link rel="prev" title="I - Paramètres à renseigner sur le script" href="Traitement.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -95,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -139,9 +139,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Vues.html">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -360,21 +367,6 @@ title="Print to PDF"
    B. Vérification de modalités et variables
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#c-nouvelle-structuration-sous-format-csv">
-   C. Nouvelle structuration sous format csv
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#d-enregistrement-csv-dans-le-dossier-temporaire">
-   D.	Enregistrement csv dans le dossier temporaire
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   D.	Enregistrement csv dans le dossier temporaire
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -404,21 +396,6 @@ title="Print to PDF"
    B. Vérification de modalités et variables
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#c-nouvelle-structuration-sous-format-csv">
-   C. Nouvelle structuration sous format csv
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#d-enregistrement-csv-dans-le-dossier-temporaire">
-   D.	Enregistrement csv dans le dossier temporaire
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   D.	Enregistrement csv dans le dossier temporaire
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -429,22 +406,44 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="ii-deconstruction">
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="ii-deconstruction">
 <h1>II - Déconstruction<a class="headerlink" href="#ii-deconstruction" title="Permalink to this headline">#</a></h1>
 <section id="a-premieres-question-creation-automatique-de-dossier-temporaire">
 <h2>A.	Premières question, création automatique de dossier temporaire<a class="headerlink" href="#a-premieres-question-creation-automatique-de-dossier-temporaire" title="Permalink to this headline">#</a></h2>
+<p>Le traitement à proprement parler commence qui commence par la cellule suivante :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_millesime</span> <span class="o">=</span> <span class="n">fonctions</span><span class="o">.</span><span class="n">traitementDonneesComplet</span><span class="p">(</span><span class="n">chemin</span><span class="p">,</span><span class="n">annee</span><span class="p">,</span><span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">source</span><span class="p">,</span><span class="n">nom_Fichier_Modalite</span><span class="p">,</span><span class="n">path_vars</span><span class="p">,</span><span class="n">suffix_nom_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cette première étape va permettre de restructurer et de télécharge tous les fichiers csv créés dans la partie précédente, sous la structure pré-définie et importable vers la base pgAdmin. L’exécution de la fonction fonction ‘traitementDonneesComplet’ va dérouler deux de questions.</p>
+<ul class="simple">
+<li><p>La première concerne l’exsistance d’un schéma non vide dans pgAdmin pour acceuillir ces nouvelles données. Attention : répondre par oui écrasera l’ancienne version des fichiers variables et modalités s’ils existent déjà.</p></li>
+<li><p>Ensuite il faut choisir l’echelle (commune, epci ect…) des données en cours de traitement.</p></li>
+</ul>
+<p>Un dossier temporaire va être créer localement pour gérer la suite du traitement. C’est le dossier ‘DosierFichierstraités’</p>
 </section>
 <section id="b-verification-de-modalites-et-variables">
 <h2>B. Vérification de modalités et variables<a class="headerlink" href="#b-verification-de-modalites-et-variables" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="c-nouvelle-structuration-sous-format-csv">
-<h2>C. Nouvelle structuration sous format csv<a class="headerlink" href="#c-nouvelle-structuration-sous-format-csv" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="d-enregistrement-csv-dans-le-dossier-temporaire">
-<h2>D.	Enregistrement csv dans le dossier temporaire<a class="headerlink" href="#d-enregistrement-csv-dans-le-dossier-temporaire" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id1">
-<h2>D.	Enregistrement csv dans le dossier temporaire<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>Pour créer ou mettre à jour la liste des variables de la source de données qui est en train d’être traité, à chaque nouvelle variable rencontrée la fonction va demander de renseigner le libellé long de cette nouvelle variable.
+Elle procédera de la même manère pour les modalités sauf que dans ce cas, elle demandera en plus la catégorie de regroument de cette nouvelle modalité.</p>
+<p>suggestion : préparér à l’avance une table comprenant toutes les information bien rangés des variables et une autre table pour les modalités (créer une métadonnées).</p>
+<p>A la fin de l’excusion de cette fonction, les fichiers csv à la structuration adéquate sont créés et se trouvent dans le dossier temporaire ‘DossierFichiersTraités’.
+On va donc passer à la suite et verser les données dans la base relationelle pgAdmin.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Si l’exécution de cette cellule produit une erreur, procédez comme suit :</p>
+<ul class="simple">
+<li><p>allez manuellement supprimer le dossier temporaire ‘DossierFichiersTraités’</p></li>
+<li><p>réexécuter la cellule en répondant ‘NON’ à la premère question (Question concernant l’existance de schéma non vide)</p></li>
+</ul>
+<p>Attention !!! ==&gt; Avant de passer au versement, pensez donc à créer une nouvelle cellule de code (dans la barre en haut, appuyer sur le bouton + . il permet d’insérer une nouvelle cellule) contenant : new_millesime = 1.</p>
+<p>Vous la supprimerez à la fin de l’exécution de tout le programme.</p>
+</div>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 </section>
 
@@ -479,7 +478,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">I -  Paramètre à renseigner sur le script</p>
+            <p class="prev-next-title">I -  Paramètres à renseigner sur le script</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Versement.html" title="next page">
@@ -496,7 +495,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

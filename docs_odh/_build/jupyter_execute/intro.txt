@@ -1,0 +1,4 @@
+!pip istall psycopg2
+
+import importlib
+importlib.reload(fonctions)

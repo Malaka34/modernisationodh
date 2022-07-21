@@ -94,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1">
@@ -138,9 +138,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Vues.html">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -290,6 +297,23 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
+        <a href="_sources/intro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
         <a href="_sources/intro.md"
    class="headerbtn"
    data-toggle="tooltip"
@@ -351,10 +375,38 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="hello">
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="hello">
 <h1>Hello !<a class="headerlink" href="#hello" title="Permalink to this headline">#</a></h1>
-<p>L’objectif de cette documentation est d’accompagné l’automatisation des processus de traitements et versements de données Excel vers <code class="docutils literal notranslate"><span class="pre">pgAdmin</span> <span class="pre">4</span> <span class="pre">(posgreSQL)</span></code>. Cette documentation explique donc dans un premier temps les façon de procéder pour déconstruire les jeux de données collectées sous format <strong>WorkBook Excel</strong> <code class="docutils literal notranslate"><span class="pre">(extensions</span> <span class="pre">xlx</span> <span class="pre">et</span> <span class="pre">xlsx)</span></code>, ensuite d’assurer la migration de ces données vers l’entrepôt de données <code class="docutils literal notranslate"><span class="pre">pgAdmin</span> <span class="pre">4</span> <span class="pre">(posgreSQL)</span></code> et enfin d’engister ces données dans leurs structures originales en tant que <code class="docutils literal notranslate"><span class="pre">Vues</span> <span class="pre">(posgreSQL)</span></code>.</p>
+<p>L’objectif de cette documentation est d’accompagner l’automatisation des processus de traitements et versements de données Excel vers <strong>pgAdmin 4 <code class="docutils literal notranslate"><span class="pre">(posgreSQL)</span></code></strong>.<br>
+Cette documentation explique donc dans un premier temps les façons de procéder pour déconstruire les jeux de données collectées sous format <strong>classeur Excel <code class="docutils literal notranslate"><span class="pre">(extensions</span> <span class="pre">xlx</span> <span class="pre">et</span> <span class="pre">xlsx)</span></code></strong>, ensuite d’assurer la migration de ces données vers l’entrepôt de données <strong>pgAdmin 4 <code class="docutils literal notranslate"><span class="pre">(posgreSQL)</span></code></strong> et enfin d’enregistrer ces données dans leurs structures originales en tant que <strong>Vues <code class="docutils literal notranslate"><span class="pre">(posgreSQL)</span></code></strong>.</p>
 <p><img alt="" src="_images/avnt_apres_migres.PNG" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Il est nécessaire d’avoir téléchargé la librairie <strong>psycopg2</strong> avant toute utilisation du programme universel.
+Veuillez trouver ci-dessous le code servant à l’installation de cette librairie</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip istall psycopg2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>N’oubliez pas d’actualiser l’appelle aux de fonctions dans le script de traitement après une modification de fonction dans le fichier <a class="reference external" href="http://fonctions.py">fonctions.py</a>. Cela se fait comme suit:</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">fonctions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pré-traitement</span></p>
 <ul>
@@ -364,10 +416,15 @@ title="Print to PDF"
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Traitement</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Traitement.html">I -  Paramètre à renseigner sur le script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Traitement.html">I -  Paramètres à renseigner sur le script</a></li>
 <li class="toctree-l1"><a class="reference internal" href="D%C3%A9construction.html">II - Déconstruction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Versement.html">III - Versement de données et suppression des dossiers temporaire</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Vues.html">IV - Enregistrement des Vues</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reconstruction des tables via Vues dans pgAdmin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Vues.html">IV - Création et mise à jour des Vues</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -376,6 +433,7 @@ title="Print to PDF"
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 </ul>
 </div>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -419,7 +477,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

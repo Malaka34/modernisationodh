@@ -12,16 +12,16 @@ kernelspec:
   language: python
   name: python3
 ---
-
+![](Bandeau_seul_ODH.png)
 
 # FAQ
 
-## Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
+## 1- Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
 
 Après un téléchargement depuis pgAdmin, il faut s'assurer que le séparateur de texte du fichier téléchargé est ';'. Ceci en le réenregistrant via Excel et en choisissant ';' comme séparateur. Il faut aussi s'assuer que l'encodage soit en utf8.
-Voici des exemples de comment faire :
+    Voici des exemples de comment faire :
 
-### Fichier des Modalités
+### a- Fichier des Modalités
 ```{code-cell}
 # Chargement du fichier des modalités (explain all the params)
 Modalites = pd.read_csv(path_vars+nom_Fichier_Modalite, delimiter=';', encoding='latin1')
@@ -38,7 +38,7 @@ Modalites.rename(columns={'codemodalid':'CodeModalID', 'categ_regroupement':'Cat
 # Enregistrement des modifications
 Modalites.to_csv(path_vars+nom_Fichier_Modalite,index=False,sep=';', encoding='utf-8')
 ```
-### Fichier des Variables
+### b-Fichier des Variables
 ```{code-cell}
 # Chargement du fichier des modalités (explain all the params)
 Variables = pd.read_csv(path_vars+nom_Fichier_Variable,sep=';',encoding='latin1')
@@ -56,7 +56,7 @@ Variables.rename(columns={'codevarid':'CodeVarID','libaxeanalyse':'LibAxeAnalyse
 Variables.to_csv(path_vars+nom_Fichier_Variable,index=False,sep=';',encoding='utf-8')
 ```
 
-### Fichier de jointure Posseder
+### c- Fichier de jointure Posseder
 ```{code-cell}
 # Chargement du fichier des modalités (explain all the params)
 Posseder = pd.read_csv(path_vars+'posseder_aides_personne.csv',sep=',',encoding='utf-8')
@@ -73,17 +73,52 @@ Posseder.rename(columns={'codevarid':'CodeVarID','codemodalid':'CodeModalID'},in
 # Enregistrement des modifications
 Posseder.to_csv(path_vars+'posseder_aides_personne.csv',index=False,sep=';',encoding='utf-8')
 ```
+## 2- Erreur UnicodeDecodeError
+Cette erreur se produit lorsque vous essayez d'ouvrir un fichier avec l'encodage 'utf-8', alors qu'il est encodé différement.
+```{code-cell}
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 1665: invalid continuation byte
+```
+Pour régler ce problème, exécutez les même cellules que dans la question précédente sauf celle du renommage.
 
 
+## 3- Erreur FileExistsError: [WinError 183] 
+Lorsque vous tombez sur ce type d'erreur comme par exemple :
+
+```{code-cell}
+FileExistsError: [WinError 183] Impossible de créer un fichier déjà existant: 'DossierFichiersTraités'
+```
+Celà indique que vous essayer de créer un dossier qui existe déjà. Il faut donc supprimer le dossier existant et rééxécuter votre code.
 
 
+## 4- Erreur ModuleNotFoundError 
+Ce type d'erreur produit quand on cherche à utiliser une librairie / package qui n'a pas été importé. 
+
+```{code-cell}
+ModuleNotFoundError: No module named 'fonctions'
+```
+Dans cette exemple, c'est parceque le chemin vers le fonctions.py à été mal indiqué. il faudrait revoir la ligne de code suivante :
+
+```{code-cell}
+sys.path.insert(0, r"C:/Users/malaka/Documents/BDD")  # à adapter a partir de malaka
+```
 
 
+## 5- Erreur AttributeError
+
+```{code-cell}
+AttributeError: 'NoneType' object has no attribute 'cursor'
+```
+Ce type d'erreur peut survenir lorsque le mot de passe et/ou le nom d'utilisateur pour la connexion au serveur sont mal renseignés.
 
 
+## 6- Erreur psycopg2.errors.UniqueViolation
 
+```{code-cell}
+psycopg2.errors.UniqueViolation: ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « age_demandeur_attribution_pkey »
+DETAIL:  La clé « (indiceposition)=(15340031522020) » existe déjà.
+```
+Cela suggère que vous avez probablement mal renseigné le paramètre annee
 
-
-
+![](logo_bandeau.jpg)
 
 

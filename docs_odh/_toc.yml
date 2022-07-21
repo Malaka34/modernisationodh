@@ -12,7 +12,9 @@ parts:
     - file: Traitement
     - file: Déconstruction
     - file: Versement
-    - file: Vues
+  - caption: Reconstruction des tables via Vues dans pgAdmin
+    chapters:
+      - file: Vues
   - caption: FAQ
     chapters:
     - file: FAQ

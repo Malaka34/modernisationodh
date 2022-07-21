@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>I - Paramètre à renseigner sur le script &#8212; Documentation traitements et versements de données</title>
+    <title>I - Paramètres à renseigner sur le script &#8212; Documentation traitements et versements de données</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -95,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1">
@@ -139,9 +139,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Vues.html">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -340,7 +347,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>I -  Paramètre à renseigner sur le script</h1>
+                <h1>I -  Paramètres à renseigner sur le script</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -352,8 +359,61 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="i-parametre-a-renseigner-sur-le-script">
-<h1>I -  Paramètre à renseigner sur le script<a class="headerlink" href="#i-parametre-a-renseigner-sur-le-script" title="Permalink to this headline">#</a></h1>
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="i-parametres-a-renseigner-sur-le-script">
+<h1>I -  Paramètres à renseigner sur le script<a class="headerlink" href="#i-parametres-a-renseigner-sur-le-script" title="Permalink to this headline">#</a></h1>
+<p>Avant de commencer à exécuter ces cellules, vous devrez déjà avoir créé dans pgAdmin le schéma où seront versées les données du classeur excel qui va être traité.<br>
+Il faut aussi fermer toutes les fichiers excel qui seront utilisés au cours de ce traitement.</p>
+<p>Le script commence par une cellule d’import de librairies nécessaires au bon déroulement du traitement et versement de données.
+L’avant-dernière ligne qui ressemble à la ligne de code suivante renseigne la localisation du fichier <a class="reference external" href="http://fonctions.py">fonctions.py</a> et donc est à adapter selon sa localisation dans votre ordinateur.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/prog/BDD&quot;</span><span class="p">)</span> <span class="c1"># à adpter à partir de malaka</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dans l’exemple ci-dessus , mon fichier fonction se trouve dans dans le dossier ‘BDD’ dont le chemin est “C:/Users/malaka/Documents/prog/BDD”.
+La cellule  après celle des imports de librairies, permet ed créer un dossier temporaire nommé ‘DossierFichiersbrutesCsv’ qui sera supprimer à la fin du programme.</p>
+<p>Il faudrait ensuite changer dans la cellule suivante, ‘SNE_Demande_2020_com.xlsx’ par le nom du fichier à traiter (le workbook). L’exécusion de la prochaine cellule va permettre d’enregistrer les feuilles excel du workbook en fichiers csv. ce format important pour la suite du programme. les noms des feuilles excel vont s’afficher au fur et à mesure qu’ils sont enregistrés en format csv.</p>
+<p>On va renseigner les paramètres du programme universel :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annee</span> <span class="o">=</span> <span class="mi">2020</span>                                         <span class="c1"># à adapter</span>
+<span class="n">path_vars</span> <span class="o">=</span><span class="s1">&#39;../vars/&#39;</span>                                <span class="c1"># à adapter</span>
+
+<span class="c1">######## PARAMETRES :: CREATION DE TABLES #########</span>
+<span class="n">suffix_nom_schema</span> <span class="o">=</span> <span class="s1">&#39;SNE&#39;</span>                            <span class="c1"># à adapter</span>
+
+<span class="n">nom_Fichier_Variable</span> <span class="o">=</span> <span class="s1">&#39;variables_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">suffix_nom_schema</span><span class="p">)</span>
+<span class="n">nom_Fichier_Modalite</span> <span class="o">=</span> <span class="s1">&#39;Modalites_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">suffix_nom_schema</span><span class="p">)</span>
+
+<span class="c1">######## PARAMETRES :: CONNEXION à LA BASE DE DONNES #########</span>
+<span class="n">Nom_base</span> <span class="o">=</span> <span class="s2">&quot;bdsociohab&quot;</span>                             <span class="c1"># à adapter</span>
+<span class="n">Nom_utilisateur</span> <span class="o">=</span> <span class="s2">&quot;Votre_d&#39;utilisateur_pgAdmin&quot;</span>     <span class="c1"># à adapter</span>
+<span class="n">mot_de_passe</span> <span class="o">=</span> <span class="s2">&quot;Votre_mot_de_passe&quot;</span>                 <span class="c1"># à adapter</span>
+<span class="n">nom_host</span> <span class="o">=</span> <span class="s2">&quot;s934&quot;</span> 
+<span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;5441&quot;</span>
+
+<span class="c1">######## PARAMETRES :: INSERTION DES DONNEES #########</span>
+<span class="n">source</span> <span class="o">=</span><span class="s1">&#39;SNE&#39;</span>                                       <span class="c1"># à adapter</span>
+<span class="n">nom_schema_donnees</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;socio_hab_&#39;</span> <span class="o">+</span> <span class="n">suffix_nom_schema</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>annee = année de collecte</p></li>
+<li><p>suffix_nom_schema = le nom qui est donné au shéma dans lequel va être versé ces données, sans la partie ‘socio_hab_’</p></li>
+<li><p>source = nom de la source (ex : ‘FSL’)</p></li>
+<li><p>path_vars = le chemin du dossier “vars”</p></li>
+<li><p>Nom_base est un string qui represente le nom de la base de données à la quelle on souhaite se connecter</p></li>
+<li><p>Nom_utilisateur est un string qui represente le nom de pgAdmin de l’utilisateur qui souhaite de connecter</p></li>
+<li><p>mot_de_passe est un string qui represente le mot de passe de l’utilisateur</p></li>
+<li><p>nom_host est un string qui represente le nom de l’hebergeur de la base de données</p></li>
+<li><p>port est un string numerique qui represente le port de connexion à la base de données</p></li>
+</ul>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -404,7 +464,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

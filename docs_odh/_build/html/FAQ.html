@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/FAQ.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="IV - Enregistrement des Vues" href="Vues.html" />
+    <link rel="prev" title="IV - Création et mise à jour des Vues" href="Vues.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -94,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1">
@@ -138,9 +138,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Vues.html">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -367,26 +374,51 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
-   Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
+  <a class="reference internal nav-link" href="#comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
+   1- Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fichier-des-modalites">
-     Fichier des Modalités
+    <a class="reference internal nav-link" href="#a-fichier-des-modalites">
+     a- Fichier des Modalités
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fichier-des-variables">
-     Fichier des Variables
+    <a class="reference internal nav-link" href="#b-fichier-des-variables">
+     b-Fichier des Variables
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fichier-de-jointure-posseder">
-     Fichier de jointure Posseder
+    <a class="reference internal nav-link" href="#c-fichier-de-jointure-posseder">
+     c- Fichier de jointure Posseder
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-unicodedecodeerror">
+   2- Erreur UnicodeDecodeError
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-fileexistserror-winerror-183">
+   3- Erreur FileExistsError: [WinError 183]
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-modulenotfounderror">
+   4- Erreur ModuleNotFoundError
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-attributeerror">
+   5- Erreur AttributeError
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-psycopg2-errors-uniqueviolation">
+   6- Erreur psycopg2.errors.UniqueViolation
+  </a>
  </li>
 </ul>
 
@@ -408,26 +440,51 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
-   Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
+  <a class="reference internal nav-link" href="#comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
+   1- Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fichier-des-modalites">
-     Fichier des Modalités
+    <a class="reference internal nav-link" href="#a-fichier-des-modalites">
+     a- Fichier des Modalités
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fichier-des-variables">
-     Fichier des Variables
+    <a class="reference internal nav-link" href="#b-fichier-des-variables">
+     b-Fichier des Variables
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fichier-de-jointure-posseder">
-     Fichier de jointure Posseder
+    <a class="reference internal nav-link" href="#c-fichier-de-jointure-posseder">
+     c- Fichier de jointure Posseder
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-unicodedecodeerror">
+   2- Erreur UnicodeDecodeError
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-fileexistserror-winerror-183">
+   3- Erreur FileExistsError: [WinError 183]
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-modulenotfounderror">
+   4- Erreur ModuleNotFoundError
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-attributeerror">
+   5- Erreur AttributeError
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreur-psycopg2-errors-uniqueviolation">
+   6- Erreur psycopg2.errors.UniqueViolation
+  </a>
  </li>
 </ul>
 
@@ -439,14 +496,15 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="faq">
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">#</a></h1>
-<section id="question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
-<h2>Question 1 : Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?<a class="headerlink" href="#question-1-comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4" title="Permalink to this headline">#</a></h2>
+<section id="comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
+<h2>1- Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?<a class="headerlink" href="#comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4" title="Permalink to this headline">#</a></h2>
 <p>Après un téléchargement depuis pgAdmin, il faut s’assurer que le séparateur de texte du fichier téléchargé est ‘;’. Ceci en le réenregistrant via Excel et en choisissant ‘;’ comme séparateur. Il faut aussi s’assuer que l’encodage soit en utf8.
 Voici des exemples de comment faire :</p>
-<section id="fichier-des-modalites">
-<h3>Fichier des Modalités<a class="headerlink" href="#fichier-des-modalites" title="Permalink to this headline">#</a></h3>
+<section id="a-fichier-des-modalites">
+<h3>a- Fichier des Modalités<a class="headerlink" href="#a-fichier-des-modalites" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
@@ -472,8 +530,8 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </section>
-<section id="fichier-des-variables">
-<h3>Fichier des Variables<a class="headerlink" href="#fichier-des-variables" title="Permalink to this headline">#</a></h3>
+<section id="b-fichier-des-variables">
+<h3>b-Fichier des Variables<a class="headerlink" href="#b-fichier-des-variables" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
@@ -499,8 +557,8 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </section>
-<section id="fichier-de-jointure-posseder">
-<h3>Fichier de jointure Posseder<a class="headerlink" href="#fichier-de-jointure-posseder" title="Permalink to this headline">#</a></h3>
+<section id="c-fichier-de-jointure-posseder">
+<h3>c- Fichier de jointure Posseder<a class="headerlink" href="#c-fichier-de-jointure-posseder" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
@@ -526,6 +584,73 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </section>
+</section>
+<section id="erreur-unicodedecodeerror">
+<h2>2- Erreur UnicodeDecodeError<a class="headerlink" href="#erreur-unicodedecodeerror" title="Permalink to this headline">#</a></h2>
+<p>Cette erreur se produit lorsque vous essayez d’ouvrir un fichier avec l’encodage ‘utf-8’, alors qu’il est encodé différement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;utf-8&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xe9 in position 1665: invalid continuation byte</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pour régler ce problème, exécutez les même cellules que dans la question précédente sauf celle du renommage.</p>
+</section>
+<section id="erreur-fileexistserror-winerror-183">
+<h2>3- Erreur FileExistsError: [WinError 183]<a class="headerlink" href="#erreur-fileexistserror-winerror-183" title="Permalink to this headline">#</a></h2>
+<p>Lorsque vous tombez sur ce type d’erreur comme par exemple :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">FileExistsError</span><span class="p">:</span> <span class="p">[</span><span class="n">WinError</span> <span class="mi">183</span><span class="p">]</span> <span class="n">Impossible</span> <span class="n">de</span> <span class="n">créer</span> <span class="n">un</span> <span class="n">fichier</span> <span class="n">déjà</span> <span class="n">existant</span><span class="p">:</span> <span class="s1">&#39;DossierFichiersTraités&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Celà indique que vous essayer de créer un dossier qui existe déjà. Il faut donc supprimer le dossier existant et rééxécuter votre code.</p>
+</section>
+<section id="erreur-modulenotfounderror">
+<h2>4- Erreur ModuleNotFoundError<a class="headerlink" href="#erreur-modulenotfounderror" title="Permalink to this headline">#</a></h2>
+<p>Ce type d’erreur produit quand on cherche à utiliser une librairie / package qui n’a pas été importé.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;fonctions&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dans cette exemple, c’est parceque le chemin vers le <a class="reference external" href="http://fonctions.py">fonctions.py</a> à été mal indiqué. il faudrait revoir la ligne de code suivante :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/BDD&quot;</span><span class="p">)</span>  <span class="c1"># à adapter a partir de malaka</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="erreur-attributeerror">
+<h2>5- Erreur AttributeError<a class="headerlink" href="#erreur-attributeerror" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;NoneType&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;cursor&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ce type d’erreur peut survenir lorsque le mot de passe et/ou le nom d’utilisateur pour la connexion au serveur sont mal renseignés.</p>
+</section>
+<section id="erreur-psycopg2-errors-uniqueviolation">
+<h2>6- Erreur psycopg2.errors.UniqueViolation<a class="headerlink" href="#erreur-psycopg2-errors-uniqueviolation" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>psycopg2.errors.UniqueViolation: ERREUR:  la valeur d&#39;une clé dupliquée rompt la contrainte unique « age_demandeur_attribution_pkey »
+DETAIL:  La clé « (indiceposition)=(15340031522020) » existe déjà.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cela suggère que vous avez probablement mal renseigné le paramètre annee</p>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 </section>
 
@@ -560,7 +685,7 @@ Voici des exemples de comment faire :</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">IV - Enregistrement des Vues</p>
+            <p class="prev-next-title">IV - Création et mise à jour des Vues</p>
         </div>
     </a>
 </div>
@@ -570,7 +695,7 @@ Voici des exemples de comment faire :</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

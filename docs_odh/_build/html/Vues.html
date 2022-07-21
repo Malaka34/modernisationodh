@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>IV - Enregistrement des Vues &#8212; Documentation traitements et versements de données</title>
+    <title>IV - Création et mise à jour des Vues &#8212; Documentation traitements et versements de données</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -95,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -123,10 +123,10 @@ const thebe_selector_output = ".output, .cell_output"
   Traitement
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1">
@@ -139,9 +139,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -340,7 +347,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>IV - Enregistrement des Vues</h1>
+                <h1>IV - Création et mise à jour des Vues</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -352,8 +359,37 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="iv-enregistrement-des-vues">
-<h1>IV - Enregistrement des Vues<a class="headerlink" href="#iv-enregistrement-des-vues" title="Permalink to this headline">#</a></h1>
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="iv-creation-et-mise-a-jour-des-vues">
+<h1>IV - Création et mise à jour des Vues<a class="headerlink" href="#iv-creation-et-mise-a-jour-des-vues" title="Permalink to this headline">#</a></h1>
+<p>Comme dans la partie traitement, on commence ce programme avec l’importations des librairies necésseraire.
+L’avant dernière ligne qui ressemble à la ligne de code suivante renseigne la locatisation du fichier <a class="reference external" href="http://fonctions.py">fonctions.py</a> et donc est à adapter selon sa localisation dans votre ordinateur.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/prog/BDD&quot;</span><span class="p">)</span> <span class="c1"># à adpter à partir de malaka</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ensuite toujours comme le script de traitement et versement de données, on va renseigner les paramètres</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">######## PARAMETRES :: CONNEXION à LA BASE DE DONNES #########</span>
+<span class="n">Nom_base</span> <span class="o">=</span> <span class="s2">&quot;bdsociohab&quot;</span>                             <span class="c1"># à adapter</span>
+<span class="n">Nom_utilisateur</span> <span class="o">=</span> <span class="s2">&quot;Votre_d&#39;utilisateur_pgAdmin&quot;</span>     <span class="c1"># à adapter</span>
+<span class="n">mot_de_passe</span> <span class="o">=</span> <span class="s2">&quot;Votre_mot_de_passe&quot;</span>                 <span class="c1"># à adapter</span>
+<span class="n">nom_host</span> <span class="o">=</span> <span class="s2">&quot;s934&quot;</span> 
+<span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;5441&quot;</span>
+
+<span class="n">suffix_nom_schema</span> <span class="o">=</span> <span class="s1">&#39;sne&#39;</span>                           <span class="c1"># à adapter</span>
+<span class="n">nom_schema_donnees</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;socio_hab_&#39;</span> <span class="o">+</span> <span class="n">suffix_nom_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La dernière cellule contient la fonction creationVuesSchema. Elle permet de créer ou de mettre à jour les vues, sous la structure originale des tables excel versés dans pgAdmin.
+Elle affiche la progression de l’exécution des tâches</p>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -404,7 +440,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

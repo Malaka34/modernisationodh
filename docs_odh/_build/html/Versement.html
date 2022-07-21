@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="canonical" href="https://gitlab.com/odh1/Modernisation_ODH/-/tree/master/Versement.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="IV - Enregistrement des Vues" href="Vues.html" />
+    <link rel="next" title="IV - Création et mise à jour des Vues" href="Vues.html" />
     <link rel="prev" title="II - Déconstruction" href="D%C3%A9construction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -95,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/Logo.jpg" class="logo" alt="logo">
+      <img src="_static/Logo_ODH.jpg" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Documentation traitements et versements de données</h1>
@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Traitement.html">
-   I -  Paramètre à renseigner sur le script
+   I -  Paramètres à renseigner sur le script
   </a>
  </li>
  <li class="toctree-l1">
@@ -139,9 +139,16 @@ const thebe_selector_output = ".output, .cell_output"
    III - Versement de données et suppression des dossiers temporaire
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reconstruction des tables via Vues dans pgAdmin
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Vues.html">
-   IV - Enregistrement des Vues
+   IV - Création et mise à jour des Vues
   </a>
  </li>
 </ul>
@@ -352,8 +359,44 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="iii-versement-de-donnees-et-suppression-des-dossiers-temporaire">
+  <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="iii-versement-de-donnees-et-suppression-des-dossiers-temporaire">
 <h1>III - Versement de données et suppression des dossiers temporaire<a class="headerlink" href="#iii-versement-de-donnees-et-suppression-des-dossiers-temporaire" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fonctions</span><span class="o">.</span><span class="n">versementDonnes2</span><span class="p">(</span><span class="n">Nom_base</span><span class="p">,</span><span class="n">Nom_utilisateur</span><span class="p">,</span><span class="n">mot_de_passe</span><span class="p">,</span><span class="n">nom_host</span><span class="p">,</span><span class="n">port</span><span class="p">,</span><span class="n">source</span><span class="p">,</span><span class="n">nom_schema_donnees</span><span class="p">,</span>
+                    <span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">nom_Fichier_Modalite</span><span class="p">,</span><span class="n">new_millesime</span><span class="p">,</span><span class="n">path_vars</span><span class="p">,</span><span class="n">suffix_nom_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cette cellule ci-dessus permet de lancer le versement des données toutes récement restructurées.
+selon la à la première question de la partie II, cette fonction va créer des nouvelles tables et insérer de nouvelles données, ou elle mettra à jour les tables existantes.</p>
+<ul class="simple">
+<li><p>Lorsqu’il sagit d’une insertion de données dans un nouveau schéma vide, les tables des variables, modalitées et celle de la jointure Posseder vont être créées. Ainsi, la fonction demandera les clés primaires (sauf celles de la table Posseder qui se créé automatiquement).</p></li>
+</ul>
+<p>Voici les clés primaires par table :</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Nom table</strong></p></th>
+<th class="text-align:center head"><p><strong>Clé</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Variable</p></td>
+<td class="text-align:center"><p>CodeVarID</p></td>
+</tr>
+<tr class="row-odd"><td><p>Modalites</p></td>
+<td class="text-align:center"><p>CodeModalID</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Lorsqu’il sagit d’une mise à jour de données dans un schéma existant (par exemple l’insertion des données d’une nouvelle année, ou encore l’insertion de données avec une nouvelle échelle ),
+la fonction va chercher les tables concernées et insérer les données, voir créer de nouvelles tables si besoin.</p></li>
+</ul>
+<p>Une fois les versement terminés, la cellule suivante va permettre de supprimer tous les dossiers temporaires créés au début de ce programme.</p>
+<p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,7 +436,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="Vues.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">IV - Enregistrement des Vues</p>
+        <p class="prev-next-title">IV - Création et mise à jour des Vues</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -404,7 +447,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Moulikatou ALAKA /" Obeservatoire Départemental de l'Habitat"<br/>
+    By Moulikatou ALAKA - Obeservatoire Départemental de l'Habitat<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

@@ -48,6 +48,8 @@ def creationTableAvecFichierComplet(fichierCSV, nom, nom_schema, con, nbclE, Cle
               
               (Dossier est un string qui indique le nom du dossier dans lequel se trouve le fichier)
               
+              path_vars est le chemin du dossier "vars"
+              
     résultats : créé une table sur une base de données. 
                 Affiche une phrase indiquant si la table à été créée ou pas et retourne le nom de la table créée
                 
@@ -362,10 +364,8 @@ def insertionDonnees2(fichierCSVpath, con, table, sep):
         
 ##################################################################################################################################
 ##################################################################################################################################
-def replacingSpaceModa(fichier_A_traiter):
+def replacingSpaceModa(listeCols):
      # création de la liste ds modalités de la variable
-    listeCols = fichier_A_traiter.columns
-    listeCols.tolist()
     
     
     #transformer les charactères en unicode
@@ -406,7 +406,7 @@ def replacingSpaceModa(fichier_A_traiter):
         if(("'") in ModasinAcc[modalite]):
             ModasinAcc[modalite]= ModasinAcc[modalite].replace("'",'_')
             
-    fichier_A_traiter.columns = ModasinAcc
+    return ModasinAcc
 
 
 ############################################################################################################################################
@@ -416,6 +416,8 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
     Donnée : fichier_A_traiter est le fichier csv original à traiter
     
             nom_Fichier_Modalite est le nom exacte du fichier CSV des modalités de cette source
+            
+            path_vars est le chemin du dossier "vars"
              
              
     Résultat : retourne la liste des modalités avec toutes les eventuelles nouvelles modalités 
@@ -433,7 +435,7 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
     repmplacerCaratereSpeciaux(fichier_A_traiter)
     
     #transformer les charactères en unicode et les premiers lettres en capitales (avec la fonction .title())
-    replacingSpaceModa(fichier_A_traiter)
+    fichier_A_traiter.columns = replacingSpaceModa(fichier_A_traiter.columns)
 
     # checking 
     
@@ -465,14 +467,14 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
                 categ_regroupement = fichier_A_traiter.columns[modalite]
 
             listeCodeModa= listeCodeModa.append({
-                    'code': len(Modalites)+1,
+                    'code': Modalites['CodeModalID'].max()+1,
                     'noms': fichier_A_traiter.columns[modalite],
                 'Lib_long': lib,
                 'categ_regroupement': categ_regroupement
                 },ignore_index=True)
 
             Modalites = Modalites.append({
-                'CodeModalID' : len(Modalites)+1,
+                'CodeModalID' : Modalites['CodeModalID'].max()+1,
                 'CodeModalEXT' : fichier_A_traiter.columns[modalite].lower(),
                 'LibelleModal' : fichier_A_traiter.columns[modalite],
                 'Libelle_long' : lib,
@@ -627,6 +629,8 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
                 annee = année de collecte
                 
                 chemin = le nom du dossier où se trouve le fichier csv à traiter
+                
+                suffix_nom_schema = le nom qui est donné au shéma dans lequel va être versé ces données, sans la partie 'socio_hab_'
 
                 nom_Fichier_Modalite est le nom exacte du fichier CSV des modalités de cette source
 
@@ -635,7 +639,7 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
                 nom_Fichier_Variable est le nom exacte du fichier CSV des variables de cette source
 
 
-        Résultat : Traite et télécharge le fichier fichier_A_traiter sous le format importable vers la base pgAdmin
+        Résultat : Traite et télécharge le fichier fichier_A_traiter sous la structure pré-définie et importable vers la base pgAdmin
 
     """
         
@@ -649,19 +653,19 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
     from tqdm import tqdm
     ################################################################################################################
 
-    print('Est-ce la première fois que cette source de données va être traitée ? \n',
-      'Est-ce le premier millésime de cette base de données qui va être traité ? (Répondez par : OUI ou NON) ')
+    print("Ces données qui vont être traité possèdent t'ils déja un schéma dans pgAdmin ? \n",
+          "c'est-à-dire que ce schéma s'il existe, contient déja des données. (Répondez par : OUI ou NON) ")
 
     OK = False
 
     while( not  OK):
         reponse = input().upper()
 
-        if(reponse == ''):
+        if(reponse == ""):
             print('Veuillez répondre à la question par OUI ou NON \n ')
 
 
-        elif(reponse == "OUI"):
+        elif(reponse == 'NON'):
             print("Attention ! Création d'une nouvelle liste de modalités et de variables pour cette nouvelle source de données \n")
 
             modalites = pd.DataFrame(columns={'CodeModalID','CodeModalEXT','LibelleModal', 'Libelle_long','Categ_regroupement'})
@@ -679,7 +683,7 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
             OK = True
             new_millesime = 1
 
-        elif(reponse == "NON"):
+        elif(reponse == "OUI"):
             print('listes de modalités et de variables déja existantes \n')
             OK = True
             new_millesime = 0
@@ -762,12 +766,14 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
     
     ############## CREATION DE LA TABLE A EXPORTER PLUS TARD ################
     
+    csv_files_sans_accent_ni_escpace = replacingSpaceModa(csv_files)
+    
     #création d'un dossier
     os.mkdir('DossierFichiersTraités')
     
     for file in tqdm(range(len(dfs))):
         #print(file, "file")
-        nomFichier= csv_files[file]
+        nomFichier= csv_files_sans_accent_ni_escpace[file]
         print(' nom ::::: ', nomFichier)
         fichier_A_traiter = dfs[file]
         var = Variables.loc[Variables['CodeVarEXT'].str.contains(nomFichier, case=False)]
@@ -827,12 +833,11 @@ def versementDonnes2(Nom_base,Nom_utilisateur,mot_de_passe,nom_host,port,source,
         Donnée : 
         
             ######## PARAMETRES :: CONNEXION à LA BASE DE DONNES #########
-            
-            Nom_base = 
-            Nom_utilisateur = 
-            mot_de_passe = 
-            nom_host = 
-            port = 
+            Nom_base = Nom_base est un string qui represente le nom de la base de données à la quelle on souhaite se connecter
+            Nom_utilisateur = Nom_utilisateur est un string qui represente le nom de pgAdmin de l'utilisateur qui souhaite de connecter
+            mot_de_passe = mot_de_passe est un string qui represente le mot de passe de l'utilisateur
+            nom_host = nom_host est un string qui represente le nom de l'hebergeur de la base de données
+            port = port est un string numerique qui represente le port de connexion à la base de données 
         
             ######## PARAMETRES :: CREATION DE TABLES #########
 
@@ -841,8 +846,10 @@ def versementDonnes2(Nom_base,Nom_utilisateur,mot_de_passe,nom_host,port,source,
             new_millesime = 
             
             ######## PARAMETRES :: INSERTION DES DONNEES #########
+            suffix_nom_schema = le nom du shéma sans la partie 'socio_hab_'
+            nom_schema_donnees = le nom complet du schéma
             source =
-            nom_schema_donnees =
+            
             
              
     
@@ -1353,6 +1360,114 @@ def dict_cleEtrangere(nom_schema_donnees,Nom_base,Nom_utilisateur,mot_de_passe,n
         
     return dict_cons
     
+##########################################################################################################################################
+##########################################################################################################################################
+
+def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, suffix_nom_schema, nom_schema_donnees):
+
+    """
+        Donnée : Nom_base = Nom_base est un string qui represente le nom de la base de données à la quelle on souhaite se connecter
+            Nom_utilisateur = Nom_utilisateur est un string qui represente le nom de pgAdmin de l'utilisateur qui souhaite de connecter
+            mot_de_passe = mot_de_passe est un string qui represente le mot de passe de l'utilisateur
+            nom_host = nom_host est un string qui represente le nom de l'hebergeur de la base de données
+            port = port est un string numerique qui represente le port de connexion à la base de données
+            suffix_nom_schema = le nom du shéma sans la partie 'socio_hab_'
+            nom_schema_donnees = le nom complet du schéma
+
+        Résultat : création ou mise à jour de vues des tables principales du schéma        
+
+    """
+    ######## IMPORT #############################
+    import psycopg2
+    from tqdm import tqdm
+    import pandas as pd
+    
+    ######## STEP 1 ::: RECUPERATION DES TABLES PRINCIPALES DANS LE SCHEMA ####################################################################################
+    con = connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port)
+    table_names = []
+    cursor = con.cursor()
+    cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = "+ "'"+nom_schema_donnees+"' AND table_type = 'BASE TABLE'")
+
+    for table in cursor.fetchall():
+        table_names.append(table[0])
+
+    ######## STEP 2 ::: RECUPERATION DES MODALITES A REPRESENTER PAR TABLE ####################################################################################
+    con = connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port)
+
+    for tab in tqdm(range(len(table_names))):
+        #nomenclature 
+        view_name = table_names[tab]
+        name_avec_schema = nom_schema_donnees+"."+view_name
+        table_name=name_avec_schema+"_Vue"
+
+        # les modalités présentes dans la table
+        sqlQuery_modalites = "select distinct {modalites}.codemodalext "+\
+                                "from {modalites}, {name_avec_schema} "+\
+                                "where {modalites}.codemodalid = {name_avec_schema}.codemodalid"
+
+        sqlQuery_modalites = sqlQuery_modalites.format(name_avec_schema=name_avec_schema, table_name=table_name,
+                              modalites= 'modalites_'+suffix_nom_schema.lower(),
+                              variables= 'variables_'+suffix_nom_schema.lower(),
+                              posseder=  'posseder_'+suffix_nom_schema.lower()   
+
+                                                      )
+        try:
+            tab_modalites_avec_type = []
+            tab_modalites_sans_type = []
+            cursor = con.cursor()
+            cursor.execute(sqlQuery_modalites)
+            result = cursor.fetchall()
+            for i in range(len(result)):
+                    tab_modalites_avec_type.append(str('"'+result[i][0]+'"' + " double precision"))
+                    tab_modalites_sans_type.append(str(result[i][0]))
+
+        except (Exception, psycopg2.Error) as error :
+            print(sqlQuery_modalites)
+
+        ######## STEP 3 ::: CREATION DE VUES ####################################################################################
+        con = connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port)
+        sqlQuery =  """
+                 CREATE VIEW {table_name} AS SELECT * FROM crosstab(
+                     ' SELECT concat({name_avec_schema}.codeentite, {name_avec_schema}.annee) as row_id, {name_avec_schema}.codeentite, 
+                     {name_avec_schema}.annee, {modalites}.codemodalext, {name_avec_schema}.valeur
+                    FROM  {name_avec_schema}, {modalites}
+                     WHERE {modalites}.codemodalid = {name_avec_schema}.codemodalid',
+                     $$ values """
+
+        # Ajout des valeurs précises
+        for i in range(len(tab_modalites_sans_type)):
+            if(i == len(result)-1):
+                sqlQuery = sqlQuery+ " ('{}') $$".format(tab_modalites_sans_type[i])
+            else:
+                sqlQuery = sqlQuery+ " ('{}'),".format(tab_modalites_sans_type[i])
+        sqlQuery = sqlQuery + ') AS table_fsl ("row_id" text,"codeentite" text, "annee" text,'
+
+
+        for i in range(len(tab_modalites_avec_type)):
+            if(i == len(result)-1):
+                sqlQuery = sqlQuery+ " {}".format(tab_modalites_avec_type[i])
+            else:
+                sqlQuery = sqlQuery+ " {},".format(tab_modalites_avec_type[i])
+        sqlQuery = sqlQuery +");"
+        sqlQuery = sqlQuery.format(name_avec_schema=name_avec_schema, table_name=table_name,
+                          modalites= 'modalites_'+suffix_nom_schema.lower(),
+                          variables= 'variables_'+suffix_nom_schema.lower(),
+                          posseder=  'posseder_'+suffix_nom_schema.lower()) 
+
+        try:
+            cur = con.cursor()
+            dropingLine = 'DROP VIEW  IF EXISTS ' + table_name+ ';'
+            cur.execute(dropingLine)
+            cur.execute(sqlQuery)
+            con.commit()
+            print('______________________________________________________________________________')
+            print("La Vue "+name_avec_schema+ " à été créée avec succès dans PostgreSQL \n")
+
+        except (Exception) as error :
+            print ("Erreur lors de la création de la Vue"+name_avec_schema+" dans PostgreSQL: ", error)
+            print(sqlQuery)
+
+
 ##########################################################################################################################################
 ##########################################################################################################################################
 

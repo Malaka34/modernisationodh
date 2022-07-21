@@ -24,3 +24,16 @@ Posseder.rename(columns={'codevarid':'CodeVarID','codemodalid':'CodeModalID'},in
 
 # Enregistrement des modifications
 Posseder.to_csv(path_vars+'posseder_aides_personne.csv',index=False,sep=';',encoding='utf-8')
+
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 1665: invalid continuation byte
+
+FileExistsError: [WinError 183] Impossible de créer un fichier déjà existant: 'DossierFichiersTraités'
+
+ModuleNotFoundError: No module named 'fonctions'
+
+sys.path.insert(0, r"C:/Users/malaka/Documents/BDD")  # à adapter a partir de malaka
+
+AttributeError: 'NoneType' object has no attribute 'cursor'
+
+psycopg2.errors.UniqueViolation: ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « age_demandeur_attribution_pkey »
+DETAIL:  La clé « (indiceposition)=(15340031522020) » existe déjà.
