@@ -5,8 +5,8 @@
 
 # # IV - Création et mise à jour des Vues
 
-# Comme dans la partie traitement, on commence ce programme avec l'importations des librairies necésseraire.
-# L’avant dernière ligne qui ressemble à la ligne de code suivante renseigne la locatisation du fichier fonctions.py et donc est à adapter selon sa localisation dans votre ordinateur.
+# Comme dans la partie **Traitement**, on commence ce programme avec l'importation des librairies nécesseraire.
+# L’avant-dernière ligne qui ressemble à la ligne de code suivante indique l'emplacement du fichier **`fonctions.py`** et doit donc être ajustée à son emplacement sur votre ordinateur.
 
 # In[ ]:
 
@@ -14,7 +14,7 @@
 sys.path.insert(0, r"C:/Users/malaka/Documents/prog/BDD") # à adpter à partir de malaka
 
 
-# Ensuite toujours comme le script de traitement et versement de données, on va renseigner les paramètres
+# Ensuite toujours comme le script de traitement et versement de données, on va remplir les paramètres :
 
 # In[ ]:
 
@@ -30,7 +30,7 @@ suffix_nom_schema = 'sne'                           # à adapter
 nom_schema_donnees = str('socio_hab_' + suffix_nom_schema)
 
 
-# La dernière cellule contient la fonction creationVuesSchema. Elle permet de créer ou de mettre à jour les vues, sous la structure originale des tables excel versés dans pgAdmin.
-# Elle affiche la progression de l'exécution des tâches
+# La dernière cellule contient la fonction **`"creationVuesSchema"`**. Elle permet de créer ou de mettre à jour les **`Vues`**, sous la structure originale des tables Excel versés dans **pgAdmin 4**.
+# Elle affiche la progression de l'exécution des tâches.
 
 # ![](logo_bandeau.jpg)

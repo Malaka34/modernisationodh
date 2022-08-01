@@ -29,13 +29,13 @@
 # 5 -	Ne pas mettre des chiffres comme nom de colonnes ni dans les noms d’onglets<br>
 # 
 # 
-# 6 -	Ne mettre qu’une table par onglet, car chaque onglet va être transformé en fichier CSV<br>
+# 6 -	Ne mettre qu’une table par onglet, car chaque onglet va être transformé en **fichier CSV**<br>
 # 
 # 
 # 7 -	Les données doivent être de la même échelle (commune / Epci / Iris) dans un classeur<br>
 # 
 # 
-# 8 -	Lorsqu’il y a des informations non renseignés, laisser leurs cellules vides. Ne surtout pas mettre "ns" au risque de compromettre la cohérence du typage de cette colonne<br>
+# 8 -	Lorsqu’il y a des informations non renseignés, laisser leurs cellules vides. `Ne surtout pas mettre "ns" au risque de compromettre la cohérence du typage de cette colonne`<br>
 # 
 # 
 # 9 - Ne garder dans les fichiers Excel que les lignes à charger dans la base de données<br>

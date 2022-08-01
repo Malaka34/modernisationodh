@@ -501,7 +501,7 @@ title="Print to PDF"
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">#</a></h1>
 <section id="comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4">
 <h2>1- Comment assurer la cohérence avec les fichiers locaux après une modification de table ou téléchargement de fichiers depuis pgAdmin 4 ?<a class="headerlink" href="#comment-assurer-la-coherence-avec-les-fichiers-locaux-apres-une-modification-de-table-ou-telechargement-de-fichiers-depuis-pgadmin-4" title="Permalink to this headline">#</a></h2>
-<p>Après un téléchargement depuis pgAdmin, il faut s’assurer que le séparateur de texte du fichier téléchargé est ‘;’. Ceci en le réenregistrant via Excel et en choisissant ‘;’ comme séparateur. Il faut aussi s’assuer que l’encodage soit en utf8.
+<p>Après un téléchargement depuis pgAdmin, il faut s’assurer que le séparateur de texte du fichier téléchargé est <strong><code class="docutils literal notranslate"><span class="pre">';'</span></code></strong>. Ceci en le réenregistrant via Excel et en choisissant  <strong><code class="docutils literal notranslate"><span class="pre">';'</span></code></strong> comme séparateur. Il faut aussi s’assurer que l’encodage soit en <strong><code class="docutils literal notranslate"><span class="pre">utf-8</span></code></strong>.
 Voici des exemples de comment faire :</p>
 <section id="a-fichier-des-modalites">
 <h3>a- Fichier des Modalités<a class="headerlink" href="#a-fichier-des-modalites" title="Permalink to this headline">#</a></h3>
@@ -587,7 +587,7 @@ Voici des exemples de comment faire :</p>
 </section>
 <section id="erreur-unicodedecodeerror">
 <h2>2- Erreur UnicodeDecodeError<a class="headerlink" href="#erreur-unicodedecodeerror" title="Permalink to this headline">#</a></h2>
-<p>Cette erreur se produit lorsque vous essayez d’ouvrir un fichier avec l’encodage ‘utf-8’, alors qu’il est encodé différement.</p>
+<p>Cette erreur se produit lorsque vous essayez d’ouvrir un fichier avec l’encodage <strong><code class="docutils literal notranslate"><span class="pre">utf-8</span></code></strong>, alors qu’il est encodé différement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;utf-8&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xe9 in position 1665: invalid continuation byte</span>
@@ -595,11 +595,11 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </div>
-<p>Pour régler ce problème, exécutez les même cellules que dans la question précédente sauf celle du renommage.</p>
+<p>Pour régler ce problème, exécutez les mêmes cellules que dans la question précédente, sauf la cellule du renommage.</p>
 </section>
 <section id="erreur-fileexistserror-winerror-183">
 <h2>3- Erreur FileExistsError: [WinError 183]<a class="headerlink" href="#erreur-fileexistserror-winerror-183" title="Permalink to this headline">#</a></h2>
-<p>Lorsque vous tombez sur ce type d’erreur comme par exemple :</p>
+<p>Lorsque vous rencontrez sur ce type d’erreur comme par exemple :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">FileExistsError</span><span class="p">:</span> <span class="p">[</span><span class="n">WinError</span> <span class="mi">183</span><span class="p">]</span> <span class="n">Impossible</span> <span class="n">de</span> <span class="n">créer</span> <span class="n">un</span> <span class="n">fichier</span> <span class="n">déjà</span> <span class="n">existant</span><span class="p">:</span> <span class="s1">&#39;DossierFichiersTraités&#39;</span>
@@ -607,11 +607,11 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </div>
-<p>Celà indique que vous essayer de créer un dossier qui existe déjà. Il faut donc supprimer le dossier existant et rééxécuter votre code.</p>
+<p>Cela indique que vous essayer de créer un dossier qui existe déjà. Vous devez donc supprimer le dossier existant et réexécuter votre code.</p>
 </section>
 <section id="erreur-modulenotfounderror">
 <h2>4- Erreur ModuleNotFoundError<a class="headerlink" href="#erreur-modulenotfounderror" title="Permalink to this headline">#</a></h2>
-<p>Ce type d’erreur produit quand on cherche à utiliser une librairie / package qui n’a pas été importé.</p>
+<p>Ce type d’erreur se produit quand vous essayez d’utiliser une bibliothèque / un package non importé.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;fonctions&#39;</span>
@@ -619,7 +619,7 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </div>
-<p>Dans cette exemple, c’est parceque le chemin vers le <a class="reference external" href="http://fonctions.py">fonctions.py</a> à été mal indiqué. il faudrait revoir la ligne de code suivante :</p>
+<p>Dans cet exemple, c’est parce que le chemin d’accès au fichier <strong><code class="docutils literal notranslate"><span class="pre">fonctions.py</span></code></strong> n’est pas spécifié correctement. la ligne de code suivante doit être modifiée :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/BDD&quot;</span><span class="p">)</span>  <span class="c1"># à adapter a partir de malaka</span>
@@ -637,7 +637,7 @@ Voici des exemples de comment faire :</p>
 </div>
 </div>
 </div>
-<p>Ce type d’erreur peut survenir lorsque le mot de passe et/ou le nom d’utilisateur pour la connexion au serveur sont mal renseignés.</p>
+<p>lorsque le mauvais mot de passe et/ou  nom d’utilisateur est entré pour se connecter au serveur.</p>
 </section>
 <section id="erreur-psycopg2-errors-uniqueviolation">
 <h2>6- Erreur psycopg2.errors.UniqueViolation<a class="headerlink" href="#erreur-psycopg2-errors-uniqueviolation" title="Permalink to this headline">#</a></h2>
@@ -649,7 +649,7 @@ DETAIL:  La clé « (indiceposition)=(15340031522020) » existe déjà.
 </div>
 </div>
 </div>
-<p>Cela suggère que vous avez probablement mal renseigné le paramètre annee</p>
+<p>Cela indique que vous avez peut-être entré le paramètre de l’année de manière incorrecte.</p>
 <p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
 </section>

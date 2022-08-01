@@ -411,7 +411,7 @@ title="Print to PDF"
 <h1>II - Déconstruction<a class="headerlink" href="#ii-deconstruction" title="Permalink to this headline">#</a></h1>
 <section id="a-premieres-question-creation-automatique-de-dossier-temporaire">
 <h2>A.	Premières question, création automatique de dossier temporaire<a class="headerlink" href="#a-premieres-question-creation-automatique-de-dossier-temporaire" title="Permalink to this headline">#</a></h2>
-<p>Le traitement à proprement parler commence qui commence par la cellule suivante :</p>
+<p>Le traitement  proprement dit commence par la cellule suivante :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_millesime</span> <span class="o">=</span> <span class="n">fonctions</span><span class="o">.</span><span class="n">traitementDonneesComplet</span><span class="p">(</span><span class="n">chemin</span><span class="p">,</span><span class="n">annee</span><span class="p">,</span><span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">source</span><span class="p">,</span><span class="n">nom_Fichier_Modalite</span><span class="p">,</span><span class="n">path_vars</span><span class="p">,</span><span class="n">suffix_nom_schema</span><span class="p">)</span>
@@ -419,28 +419,27 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Cette première étape va permettre de restructurer et de télécharge tous les fichiers csv créés dans la partie précédente, sous la structure pré-définie et importable vers la base pgAdmin. L’exécution de la fonction fonction ‘traitementDonneesComplet’ va dérouler deux de questions.</p>
+<p>Cette première étape va permettre de restructurer et de télécharge tous les fichiers csv créés dans la partie précédente, sous la structure prédéfinie et importable vers la base de données <strong>pgAdmin 4</strong>. L’exécution de la fonction fonction <strong><code class="docutils literal notranslate"><span class="pre">&quot;traitementDonneesComplet&quot;</span></code></strong> va dérouler deux questions:</p>
 <ul class="simple">
-<li><p>La première concerne l’exsistance d’un schéma non vide dans pgAdmin pour acceuillir ces nouvelles données. Attention : répondre par oui écrasera l’ancienne version des fichiers variables et modalités s’ils existent déjà.</p></li>
-<li><p>Ensuite il faut choisir l’echelle (commune, epci ect…) des données en cours de traitement.</p></li>
+<li><p>La première concerne l’exsistence d’un schéma non vide dans pgAdmin pour accueillir ces nouvelles données. <code class="docutils literal notranslate"><span class="pre">Attention</span> <span class="pre">:</span> <span class="pre">répondre</span> <span class="pre">par</span> <span class="pre">oui</span> <span class="pre">écrasera</span> <span class="pre">l'ancienne</span> <span class="pre">version</span> <span class="pre">des</span> <span class="pre">fichiers</span> <span class="pre">variables</span> <span class="pre">et</span> <span class="pre">modalités</span> <span class="pre">s'ils</span> <span class="pre">existent</span> <span class="pre">déjà</span></code>.</p></li>
+<li><p>Ensuite il faut choisir l’echelle (commune, epci etc.) des données en cours de traitement.</p></li>
 </ul>
-<p>Un dossier temporaire va être créer localement pour gérer la suite du traitement. C’est le dossier ‘DosierFichierstraités’</p>
+<p>Un dossier temporaire va être créer localement pour gérer la suite du traitement. C’est le dossier <strong>“DosierFichierstraités”</strong>.</p>
 </section>
 <section id="b-verification-de-modalites-et-variables">
 <h2>B. Vérification de modalités et variables<a class="headerlink" href="#b-verification-de-modalites-et-variables" title="Permalink to this headline">#</a></h2>
-<p>Pour créer ou mettre à jour la liste des variables de la source de données qui est en train d’être traité, à chaque nouvelle variable rencontrée la fonction va demander de renseigner le libellé long de cette nouvelle variable.
-Elle procédera de la même manère pour les modalités sauf que dans ce cas, elle demandera en plus la catégorie de regroument de cette nouvelle modalité.</p>
-<p>suggestion : préparér à l’avance une table comprenant toutes les information bien rangés des variables et une autre table pour les modalités (créer une métadonnées).</p>
-<p>A la fin de l’excusion de cette fonction, les fichiers csv à la structuration adéquate sont créés et se trouvent dans le dossier temporaire ‘DossierFichiersTraités’.
-On va donc passer à la suite et verser les données dans la base relationelle pgAdmin.</p>
+<p>Pour créer ou mettre à jour la liste des variables de la source de données  en cours de traitement, pour chaque nouvelle variable rencontrée, la fonction demandera de saisir le libellé long de cette nouvelle variable. Elle procédera de la même manière pour les modalités sauf que dans ce cas, elle demandera en plus la catégorie de regroupement de cette nouvelle modalité.</p>
+<p><strong>suggestion :</strong> préparer à l’avance une table comprenant toutes les informations bien rangéss des variables et une autre table pour les modalités (créer une métadonnée).</p>
+<p>À la fin de l’exécusion de cette fonction, les fichiers <strong>csv</strong> à la structuration adéquate sont créés et se trouvent dans le dossier temporaire <strong>“DosierFichierstraités”</strong>.
+On va donc passer à la suite et verser les données dans la base relationnelle <strong>pgAdmin</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Si l’exécution de cette cellule produit une erreur, procédez comme suit :</p>
 <ul class="simple">
-<li><p>allez manuellement supprimer le dossier temporaire ‘DossierFichiersTraités’</p></li>
-<li><p>réexécuter la cellule en répondant ‘NON’ à la premère question (Question concernant l’existance de schéma non vide)</p></li>
+<li><p>allez manuellement supprimer le dossier temporaire <strong>“DosierFichierstraités”</strong></p></li>
+<li><p>réexécuter la cellule en répondant “NON” à la première question (Question concernant l’existence de schéma non vide)</p></li>
 </ul>
-<p>Attention !!! ==&gt; Avant de passer au versement, pensez donc à créer une nouvelle cellule de code (dans la barre en haut, appuyer sur le bouton + . il permet d’insérer une nouvelle cellule) contenant : new_millesime = 1.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Attention</span> <span class="pre">!!!</span></code> : Avant de passer au versement, pensez donc à créer une nouvelle cellule de code (dans la barre en haut, appuyer sur le bouton <strong>+</strong> . il permet d’insérer une nouvelle cellule) contenant : new_millesime = 1.</p>
 <p>Vous la supprimerez à la fin de l’exécution de tout le programme.</p>
 </div>
 <p><img alt="" src="_images/logo_bandeau.jpg" /></p>

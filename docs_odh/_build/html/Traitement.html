@@ -362,10 +362,10 @@ title="Print to PDF"
   <p><img alt="" src="_images/Bandeau_seul_ODH.png" /></p>
 <section class="tex2jax_ignore mathjax_ignore" id="i-parametres-a-renseigner-sur-le-script">
 <h1>I -  Paramètres à renseigner sur le script<a class="headerlink" href="#i-parametres-a-renseigner-sur-le-script" title="Permalink to this headline">#</a></h1>
-<p>Avant de commencer à exécuter ces cellules, vous devrez déjà avoir créé dans pgAdmin le schéma où seront versées les données du classeur excel qui va être traité.<br>
-Il faut aussi fermer toutes les fichiers excel qui seront utilisés au cours de ce traitement.</p>
-<p>Le script commence par une cellule d’import de librairies nécessaires au bon déroulement du traitement et versement de données.
-L’avant-dernière ligne qui ressemble à la ligne de code suivante renseigne la localisation du fichier <a class="reference external" href="http://fonctions.py">fonctions.py</a> et donc est à adapter selon sa localisation dans votre ordinateur.</p>
+<p>Avant de démarrer l’exécution de ces cellules, vous devez avoir déjà créé dans <strong>pgAdmin</strong> le schéma dans lequel les données du classeur Excel seront chargées et traitées.
+Il est en outre nécessaire de fermer tous les fichiers Excel qui seront utilisés pendant ce traitement.</p>
+<p>Le script commence par une cellule qui importe les bibliothèques nécessaires au bon déroulement du traitement et du transfert des données.
+L’avant-dernière ligne similaire à la ligne de code suivante représente l’emplacement du fichier <strong><code class="docutils literal notranslate"><span class="pre">fonctions.py</span></code></strong>, il doit donc être ajusté en fonction de son emplacement sur votre ordinateur.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/prog/BDD&quot;</span><span class="p">)</span> <span class="c1"># à adpter à partir de malaka</span>
@@ -373,10 +373,10 @@ L’avant-dernière ligne qui ressemble à la ligne de code suivante renseigne l
 </div>
 </div>
 </div>
-<p>Dans l’exemple ci-dessus , mon fichier fonction se trouve dans dans le dossier ‘BDD’ dont le chemin est “C:/Users/malaka/Documents/prog/BDD”.
-La cellule  après celle des imports de librairies, permet ed créer un dossier temporaire nommé ‘DossierFichiersbrutesCsv’ qui sera supprimer à la fin du programme.</p>
-<p>Il faudrait ensuite changer dans la cellule suivante, ‘SNE_Demande_2020_com.xlsx’ par le nom du fichier à traiter (le workbook). L’exécusion de la prochaine cellule va permettre d’enregistrer les feuilles excel du workbook en fichiers csv. ce format important pour la suite du programme. les noms des feuilles excel vont s’afficher au fur et à mesure qu’ils sont enregistrés en format csv.</p>
-<p>On va renseigner les paramètres du programme universel :</p>
+<p>Dans l’exemple ci-dessus , mon fichier fonction se trouve dans dans le dossier <strong>“BDD”</strong> dont le chemin est <code class="docutils literal notranslate"><span class="pre">&quot;C:/Users/malaka/Documents/prog/BDD&quot;</span></code>.
+La cellule  après celle des imports de librairies, permet ed créer un dossier temporaire nommé <strong>“DossierFichiersbrutesCsv”</strong> qui sera supprimer à la fin du programme.</p>
+<p>Il faudrait ensuite changer dans la cellule suivante, <strong>“SNE_Demande_2020_com.xlsx”</strong> par le nom du fichier à traiter (le classeur Excel). L’exécution de la prochaine cellule permettra d’enregistrer les feuilles Excel du classeur en fichier <strong>csv</strong>. Ce format est important pour la suite du programme. les noms des feuilles Excel vont s’afficher au fur et à mesure qu’ils sont enregistrés en format csv.</p>
+<p>On va entrer les paramètres du programme universel :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annee</span> <span class="o">=</span> <span class="mi">2020</span>                                         <span class="c1"># à adapter</span>
@@ -403,15 +403,15 @@ La cellule  après celle des imports de librairies, permet ed créer un dossier 
 </div>
 </div>
 <ul class="simple">
-<li><p>annee = année de collecte</p></li>
-<li><p>suffix_nom_schema = le nom qui est donné au shéma dans lequel va être versé ces données, sans la partie ‘socio_hab_’</p></li>
-<li><p>source = nom de la source (ex : ‘FSL’)</p></li>
-<li><p>path_vars = le chemin du dossier “vars”</p></li>
-<li><p>Nom_base est un string qui represente le nom de la base de données à la quelle on souhaite se connecter</p></li>
-<li><p>Nom_utilisateur est un string qui represente le nom de pgAdmin de l’utilisateur qui souhaite de connecter</p></li>
-<li><p>mot_de_passe est un string qui represente le mot de passe de l’utilisateur</p></li>
-<li><p>nom_host est un string qui represente le nom de l’hebergeur de la base de données</p></li>
-<li><p>port est un string numerique qui represente le port de connexion à la base de données</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">annee</span></code> = année de collecte</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffix_nom_schema</span></code> = le nom qui est donné au shéma dans lequel va être versé ces données, sans la partie ‘socio_hab_’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> = nom de la source (ex : ‘FSL’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path_vars</span></code> = le chemin du dossier “vars”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nom_base</span></code> = un string qui represente le nom de la base de données à la quelle on souhaite se connecter</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nom_utilisateur</span></code> = un string qui represente le nom de pgAdmin de l’utilisateur qui souhaite de connecter</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mot_de_passe</span></code> = un string qui represente le mot de passe de l’utilisateur</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nom_host</span></code> = un string qui represente le nom de l’hebergeur de la base de données</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code> = un string numerique qui represente le port de connexion à la base de données</p></li>
 </ul>
 <p><img alt="" src="_images/logo_bandeau.jpg" /></p>
 </section>
