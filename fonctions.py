@@ -1418,8 +1418,14 @@ def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, 
             cursor.execute(sqlQuery_modalites)
             result = cursor.fetchall()
             for i in range(len(result)):
-                    tab_modalites_avec_type.append(str('"'+result[i][0]+'"' + " double precision"))
-                    tab_modalites_sans_type.append(str(result[i][0]))
+                # ajout du suffix "numeric" lorsque le nom de la modalité commence par '_'
+                new_name = result[i][0]
+                string1 = new_name[0]
+                if(string1 == '_'):
+                    new_name = new_name.replace(string1, 'numeric_'+string1,1)
+
+                tab_modalites_sans_type.append(str(new_name))
+                tab_modalites_avec_type.append(str('"'+new_name+'"' + " double precision"))
 
         except (Exception, psycopg2.Error) as error :
             print(sqlQuery_modalites)
