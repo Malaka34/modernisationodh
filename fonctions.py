@@ -1422,7 +1422,7 @@ def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, 
                 new_name = result[i][0]
                 string1 = new_name[0]
                 if(string1 == '_'):
-                    new_name = new_name.replace(string1, 'numeric_'+string1,1)
+                    new_name = new_name.replace(string1, 'numeric'+string1,1)
 
                 tab_modalites_sans_type.append(str(new_name))
                 tab_modalites_avec_type.append(str('"'+new_name+'"' + " double precision"))
